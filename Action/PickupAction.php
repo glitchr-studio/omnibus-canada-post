@@ -36,7 +36,7 @@ final class PickupAction implements ActionInterface, ApiAwareInterface
         $points = [];
         foreach ($data->{'post-office'} ?? [] as $office) {
             $a = $office->address;
-            $points[] = new PickupPoint('canada-post', (string) $office->{'office-id'}, (string) $office->name,
+            $points[] = new PickupPoint('canada_post', (string) $office->{'office-id'}, (string) $office->name,
                 new Address((string) $office->name, [(string) $a->{'office-address'}], (string) $a->{'postal-code'}, (string) $a->city, 'CA'),
                 isset($a->latitude) ? (float) $a->latitude : null, isset($a->longitude) ? (float) $a->longitude : null, [],
                 isset($office->distance) ? (int) round(((float) $office->distance) * 1000) : null);

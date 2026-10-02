@@ -42,7 +42,7 @@ final class Api
             $content = $response->getContent(false);
             $type = $response->getHeaders(false)['content-type'][0] ?? '';
         } catch (HttpExceptionInterface $e) {
-            throw new CarrierException('canada-post', 'Canada Post request failed: '.$e->getMessage(), null, $e);
+            throw new CarrierException('canada_post', 'Canada Post request failed: '.$e->getMessage(), null, $e);
         }
         if ($status < 400 && !str_contains($type, 'xml') && !str_starts_with(ltrim($content), '<')) {
             return $content;
@@ -50,7 +50,7 @@ final class Api
         $xml = self::parse($content);
         if ($status >= 400 || 'messages' === $xml->getName()) {
             $message = $xml->message[0] ?? null;
-            throw new CarrierException('canada-post', (string) ($message->description ?? sprintf('HTTP %d', $status)), isset($message->code) ? (string) $message->code : null);
+            throw new CarrierException('canada_post', (string) ($message->description ?? sprintf('HTTP %d', $status)), isset($message->code) ? (string) $message->code : null);
         }
 
         return $xml;
@@ -60,7 +60,7 @@ final class Api
     {
         $xml = @simplexml_load_string(preg_replace('/\sxmlns(:\w+)?="[^"]*"/', '', $content));
         if (false === $xml) {
-            throw new CarrierException('canada-post', 'Canada Post answered with a body that is not XML.');
+            throw new CarrierException('canada_post', 'Canada Post answered with a body that is not XML.');
         }
 
         return $xml;

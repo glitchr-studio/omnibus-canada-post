@@ -63,7 +63,7 @@ final class ShippingAction implements ActionInterface, ApiAwareInterface
         $data = $this->api->call('POST', $contract ? "/rs/$customer/$customer/shipment" : "/rs/$customer/ncshipment", $xml, $type);
         $number = (string) ($data->{'tracking-pin'} ?? '');
         if ('' === $number) {
-            throw new CarrierException('canada-post', 'Canada Post booked no shipment.');
+            throw new CarrierException('canada_post', 'Canada Post booked no shipment.');
         }
         $labelUrl = null;
         $content = null;
@@ -78,6 +78,6 @@ final class ShippingAction implements ActionInterface, ApiAwareInterface
                 }
             }
         }
-        $request->setResult(new Label('canada-post', $number, $content, 'ZPL' === strtoupper((string) $s->option('label_format', 'PDF')) ? Label::ZPL : Label::PDF, $labelUrl, 'https://www.canadapost-postescanada.ca/track-reperage/en#/search?searchFor='.rawurlencode($number)));
+        $request->setResult(new Label('canada_post', $number, $content, 'ZPL' === strtoupper((string) $s->option('label_format', 'PDF')) ? Label::ZPL : Label::PDF, $labelUrl, 'https://www.canadapost-postescanada.ca/track-reperage/en#/search?searchFor='.rawurlencode($number)));
     }
 }

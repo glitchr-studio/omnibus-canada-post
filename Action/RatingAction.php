@@ -49,7 +49,7 @@ final class RatingAction implements ActionInterface, ApiAwareInterface
         foreach ($data->{'price-quote'} ?? [] as $quote) {
             $code = (string) $quote->{'service-code'};
             $days = isset($quote->{'service-standard'}->{'expected-transit-time'}) ? (int) $quote->{'service-standard'}->{'expected-transit-time'} : null;
-            $rates[] = new Rate('canada-post', $code, (string) ($quote->{'service-name'} ?: Mapping::SERVICES[$code] ?? $code), (int) round(((float) $quote->{'price-details'}->due) * 100), 'CAD', $days);
+            $rates[] = new Rate('canada_post', $code, (string) ($quote->{'service-name'} ?: Mapping::SERVICES[$code] ?? $code), (int) round(((float) $quote->{'price-details'}->due) * 100), 'CAD', $days);
         }
         usort($rates, static fn (Rate $a, Rate $b) => $a->amount <=> $b->amount);
         $request->setResult($rates);

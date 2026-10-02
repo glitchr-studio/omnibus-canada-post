@@ -7,8 +7,8 @@ tracking and the nearest post offices - the XML REST web services with basic aut
 ```yaml
 omnibus:
     gateways:
-        canada-post:
-            factory: canada-post
+        canada_post:
+            factory: canada_post
             options:
                 username: '%env(CANADA_POST_USERNAME)%'    # the API key's username and password
                 password: '%env(CANADA_POST_PASSWORD)%'

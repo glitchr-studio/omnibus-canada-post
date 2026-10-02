@@ -25,7 +25,7 @@ final class CanadaPostGatewayFactory extends GatewayFactory
     protected function populateConfig(Config $config): void
     {
         $config->defaults([
-            'omnibus.factory_name' => 'canada-post',
+            'omnibus.factory_name' => 'canada_post',
             'omnibus.factory_title' => 'Canada Post',
             'omnibus.required_options' => ['username', 'password', 'customer_number'],
             'contract_id' => null,

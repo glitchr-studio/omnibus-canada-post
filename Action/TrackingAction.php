@@ -43,6 +43,6 @@ final class TrackingAction implements ActionInterface, ApiAwareInterface
         if (!empty($data->{'actual-delivery-date'})) {
             $status = TrackingStatus::DELIVERED;
         }
-        $request->setResult(new TrackingModel('canada-post', $request->trackingNumber, $status, $events));
+        $request->setResult(new TrackingModel('canada_post', $request->trackingNumber, $status, $events));
     }
 }
