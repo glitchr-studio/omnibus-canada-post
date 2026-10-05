@@ -7,7 +7,6 @@ use Omnibus\CanadaPost\Action\RatingAction;
 use Omnibus\CanadaPost\Action\ShippingAction;
 use Omnibus\CanadaPost\Action\TrackingAction;
 use Omnibus\Config;
-use Omnibus\Exception\InvalidConfigException;
 use Omnibus\GatewayFactory;
 use Symfony\Component\HttpClient\HttpClient;
 
@@ -31,7 +30,7 @@ final class CanadaPostGatewayFactory extends GatewayFactory
             'contract_id' => null,
             'sandbox' => false,
             'omnibus.api' => function (Config $c) {
-                $http = $this->http ?? (class_exists(HttpClient::class) ? HttpClient::create() : throw new InvalidConfigException('The "canada-post" gateway needs symfony/http-client.'));
+                $http = $this->http ?? HttpClient::create();
 
                 return new Api($http, (string) $c['username'], (string) $c['password'], (string) $c['customer_number'], $c['contract_id'] ?: null, (bool) $c['sandbox']);
             },
